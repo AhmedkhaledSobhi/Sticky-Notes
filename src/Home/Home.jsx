@@ -223,7 +223,7 @@ export default function Home() {
       {/* ================================== Display Name User ============================== */}
       
           <div className={`${HomeStyle.aaaaa} text-center w-25 m-auto`}>
-            <h1 className='fw-bolder'>welcom <span className='fs-3'>{displaydata.first_name}</span> <span className='fs-3'>{displaydata.last_name}</span> </h1>
+            <h1 className='fw-bolder '>welcom <><span className='fs-3'>{displaydata.first_name}</span> <span className='fs-3'>{displaydata.last_name}</span> </> </h1>
           </div> 
 
       {/* ========================= btn Add Note ================================ */}
@@ -236,7 +236,7 @@ export default function Home() {
           <div className='container shadow-lg rounded-2 w-100 px-5 my-5 py-4'>
               <div className="row g-3 gx-5">
                   {displayNotePage&&displayNotePage.map((note,i)=> 
-                    <div key={note._id} className={`col-lg-3  ${HomeStyle.hnotes} overflow-hidden bg-lig mx-auto rounded-4`}>
+                    <div key={note._id} className={`col-lg-3  ${HomeStyle.hnotes} overflow-hidden bg-nfo mx-auto rounded-4`}>
                       <div className={`text-center py-2 position-relative`}>
                         <div className='position-absolute mt-4 me-2 top-0 end-0'>
                           <ul>
