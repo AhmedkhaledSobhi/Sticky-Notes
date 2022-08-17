@@ -16,23 +16,17 @@ export default function Nave(props) {
       <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
         {props.userData === null? 
         <><li className="nav-item dropdown">
-        <a className="nav-link dropdown-toggle text-black fw-bolder fs-4"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Login
-        </a>
-        <ul className="dropdown-menu">
-          <li><Link className="dropdown-item" to="SignUp">Sign Up</Link></li>
-          <li><Link className="dropdown-item" to="SignIn">Sign in</Link></li>
-        </ul>
-      </li></> : <li className="nav-item dropdown">
-      <a className="nav-link dropdown-toggle text-black fw-bolder fs-4"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          logOut
-        </a>
+          <a className="nav-link dropdown-toggle text-black fw-bolder fs-4"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Login
+          </a>
           <ul className="dropdown-menu">
-            <li><Link onClick={props.logOut} className="dropdown-item" to="SignIn">LogOut</Link></li>
+            <li><Link className="dropdown-item" to="SignUp">Sign Up</Link></li>
+            <li><Link className="dropdown-item" to="SignIn">Sign in</Link></li>
           </ul>
-        </li>}
+        </li></> :<li  className='btn btn-outline-dark btn-lg'>
+                  <Link onClick={props.logOut} className="dropdown-item " to="SignIn">LogOut</Link>
+                </li>}
       </ul>
-     
     </div>
   </div>
 </nav>

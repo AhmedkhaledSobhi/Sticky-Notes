@@ -31,7 +31,8 @@ a
     width:19rem !important;
     display: noe !important;
     height: 15rem !important;
-    box-shadow: 10px 10px ;
+    box-shadow: 3px 3px cadetblue;
+    border:2px solid #fff;
 }
 .readbe
 {

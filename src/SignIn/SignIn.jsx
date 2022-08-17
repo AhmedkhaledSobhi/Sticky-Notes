@@ -55,7 +55,7 @@ export default function SignIn(props) {
             function validataRegisterForm()
             {
                 let schema = Joi.object({
-                    password: Joi.string().pattern(new RegExp('^[A-Z][a-z]{3,8}$')).required(),
+                    password: Joi.string().pattern(new RegExp('[A-Z][a-z]{3,8}')).required(),
                     email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
                 });
                 
@@ -68,20 +68,20 @@ export default function SignIn(props) {
       <div id='Regesiter' className='mt-5 m-auto w-50'>
             <h1>SignUp</h1>
             {/* Register form */}
-            {errorList.map((error ,i )=><div key={i}  className='alert alert-danger mt-2'>{error.message}</div>)}
+            {/* {errorList.map((error ,i )=><div key={i}  className='alert alert-danger mt-2'>{error.message}</div>)} */}
             {error.length>0?<div className='alert alert-danger mt-2'>{error}</div>: ''}
             
             <form onSubmit={submitRegisterForm} >
                 <div>
                     <label htmlFor="email"></label>
                     <input  onChange={SaveUserData} type="email" id='email' className='form-control' placeholder='Enter your Email'name='email' />
-                    {/* {errorList.filter((detel)=>{return detel.context.label=='email'}).length?<div className='alert alert-danger mt-2'>{errorList.key} Error  email </div>:""} */}
+                    {errorList.filter((detel)=>{return detel.context.label=='email'}).length?<div className='alert alert-danger mt-2'>{errorList.key} Error  email </div>:""}
                 </div>
                 
                 <div>
                     <label htmlFor="password"></label>
                     <input  onChange={SaveUserData} type="password" className='form-control' placeholder='Enter Password'id='password' name='password' />
-                    {/* {errorList.filter((detel)=>{return detel.context.label==='password'}).length?<div className='alert alert-danger mt-2'>password first letter in capital ( A ) </div>:""} */}
+                    {errorList.filter((detel)=>{return detel.context.label==='password'}).length?<div className='alert alert-danger mt-2'>password first letter in capital ( A ) </div>:""}
                 </div>
                 <button type='Submit' className='form-control mt-3 bg-transparent '>
                     {isloading===true?<i className="fa-solid fa-spin fa-atom fs-2 "></i> : "Sign In"}

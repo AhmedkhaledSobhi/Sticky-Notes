@@ -23,7 +23,7 @@ export default function Home() {
         let decoded=jwtDecode(encoded);
         const [displayNotePage, setDisplayNotePage] = useState([]);
         const [isloding, setIsloding] = useState(false);
-        const [user, setUser] = useState({
+        let [user, setUser] = useState({
           title:"",
           desc:"",
           userID:decoded._id,
@@ -39,18 +39,19 @@ export default function Home() {
             let Myuser={...user};
             Myuser[e.target.name]=e.target.value;
             setUser(Myuser);
-           // console.log(Myuser);
+           console.log(Myuser);
           }
 
 // ===================== Add Note ========================
 
-          async function addNote()
+          async function addNote(e)
           {
             setIsloding(true);
             setLoadingScreen(true)
             let {data}=  await Axios.post('https://route-egypt-api.herokuapp.com/addNote', user);
             if(data.message=== 'success')
             {
+              
               setIsloding(false);
               setLoadingScreen(false)
               document.getElementById('addNote').classList.add('d-none');
@@ -61,6 +62,7 @@ export default function Home() {
                 showConfirmButton: false,
                 timer: 1500
               })
+                        
             }
             // console.log(data);
           }
@@ -164,12 +166,12 @@ export default function Home() {
               showConfirmButton: false,
               timer: 1500
             })
+            
           }
           else
           {
             setIsloding(false);
             Swal.fire({
-
               position: 'center-center',
               icon: 'error',
               title: 'Oops...',
@@ -231,14 +233,14 @@ export default function Home() {
           </div>
       {/* ============================ Screen Display Note  ===================================  */}
           
-          <div className='container shadow-lg border-0 rounded-2 w-75 m-auto my-5 py-4'>
+          <div className='container shadow-lg rounded-2 w-100 px-5 my-5 py-4'>
               <div className="row g-3 gx-5">
                   {displayNotePage&&displayNotePage.map((note,i)=> 
-                    <div key={note._id} className={`col-lg-3  ${HomeStyle.hnotes} overflow-hidden border mx-2 rounded-4`}>
+                    <div key={note._id} className={`col-lg-3  ${HomeStyle.hnotes} overflow-hidden bg-lig mx-auto rounded-4`}>
                       <div className={`text-center py-2 position-relative`}>
                         <div className='position-absolute mt-4 me-2 top-0 end-0'>
                           <ul>
-                            <li className=" dropdon">
+                            <l>
                               <a className="nav-lin text-black fw-bolder fs-5"  role="btton" data-bs-toggle="dropdown" >
                                 <i className="fa-solid fa-1x fa-ellipsis-vertical"></i>
                               </a>
@@ -250,7 +252,7 @@ export default function Home() {
                                   <a  onClick={deleteNote} id={note._id} name=" ahmed" className="dropdown-item text-center fs-5" to="LogOut"> delete <i onClick={deleteNote} className="fa-solid fs-5 text-danger fa-trash-can"></i></a>
                                 </li>
                               </ul>
-                            </li>
+                            </l>
                           </ul>
                         </div>
                         <div className='w-75 m-auto overflow-hidden'>
@@ -265,27 +267,27 @@ export default function Home() {
           </div>
 
       {/* ========================== page Add Note ========================== */}
-
-          <div id='addNote' className={`${HomeStyle.PageAddNote} d-none bg-light border rounded-4 mt-5 `}>
-            <div className='d-flex justify-content-between px-4 pt-3 w-100 m-auto -4'>
-              <h4 className="card-title "> Title</h4>
-              <button id='close' onClick={clossNote} type="button" className="btn-close" aria-label="Close"></button>
+            <div id='addNote' className={`${HomeStyle.PageAddNote} d-none bg-light border rounded-4 mt-5 `}>
+              <div className='d-flex justify-content-between px-4 pt-3 w-100 m-auto -4'>
+                <h4 className="card-title "> Title</h4>
+                <button id='close' onClick={clossNote} type="button" className="btn-close" aria-label="Close"></button>
+              </div>
+              <hr/>
+              <div className='w-100 px-4'>
+                <input onChange={getDataToken} type="text" className='w-100 my-3 p-2 rounded-2'  placeholder='Title' name="title"/>
+                <textarea onChange={getDataToken} className='w-100 rounded-2 p-2' placeholder='Type your Note' name="desc" id="" cols="30" rows="10"></textarea>
+              </div>
+              <hr/>
+              <div className='d-flex justify-content-end me-3 my-2'>
+                
+                  <a onClick={()=>{addNote() ;getUserNotes()}} className="card-link btn btn-primary">
+                    {isloding===true?<><i className="fa-solid fa-spin fa-atom fs-2 "></i>
+                    </>:'Add' }
+                  </a>
+                  <a onClick={clossNote} className="card-link btn btn-danger ms-2">Cancel</a>
+              </div>
             </div>
-            <hr/>
-            <div className='w-100 px-4'>
-              <input onChange={getDataToken} type="text" className='w-100 my-3 p-2 rounded-2'  placeholder='Title' name="title"/>
-              <textarea onChange={getDataToken} className='w-100 rounded-2 p-2' placeholder='Type your Note' name="desc" id="" cols="30" rows="10"></textarea>
-            </div>
-            <hr/>
-            <div className='d-flex justify-content-end me-3 my-2'>
-              
-                <a onClick={()=>{addNote() ;getUserNotes()}} className="card-link btn btn-primary">
-                  {isloding===true?<><i className="fa-solid fa-spin fa-atom fs-2 "></i>
-                  </>:'Add' }
-                </a>
-                <a onClick={clossNote} className="card-link btn btn-danger ms-2">Cancel</a>
-            </div>
-          </div>
+          
         
       {/* ====================  page UpDate =========================*/}
 

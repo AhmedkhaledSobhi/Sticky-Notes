@@ -42,7 +42,7 @@ export default function SignUp() {
                 if(data.message==='success')
                 {
                     navigate('/SignIn');
-                   setIsloading(false);
+                    setIsloading(false);
                 }
                 else
                 {
@@ -60,7 +60,7 @@ export default function SignUp() {
                     last_name:Joi.string().alphanum().min(3).max(30).required(),
                     age:Joi.number().integer().min(10).max(100),
                     email:Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
-                    password: Joi.string().pattern(new RegExp('^[A-Z][a-z]{3,8}$')).required(),
+                    password: Joi.string().pattern(new RegExp('[A-Z][a-z]{3,8}')).required(),
                 })
                 return schema.validate(user ,{abortEarly:false});
             }
@@ -70,8 +70,8 @@ export default function SignUp() {
         <div id='Regesiter' className='mt-5 m-auto w-50'>
             <h1>SignUp</h1>
 
-            {errorList.map((error,i )=><div key={i} className='w-50 mx-auto rounded-pill alert alert-danger mt-2 text-center'>{error.message}</div>)}
-            {/* {error.length > 0?<div className='alert alert-danger mt-2 text-center'>{error}</div>:''} */}
+            {/* {errorList.map((error,i )=><div key={i} className='w-50 mx-auto rounded-pill alert alert-danger mt-2 text-center'>{error.message}</div>)} */}
+            {/* {error.length>0?<div className='alert alert-danger mt-2'>{error}</div>: ''} */}
             
             <form onSubmit={submitRegisterForm} >
                 <div className='d-flex'>
@@ -79,7 +79,7 @@ export default function SignUp() {
                         <label htmlFor="first_name"></label>
                         <input onChange={SaveUserData} type="text" className='form-control'placeholder='Enter Firest Name' id='first_name' name='first_name' />
                         {errorList.filter((detel1)=>{return detel1.context.label==='first_name'}).length?<div className='alert alert-danger  rounded-pill mt-2 text-center'>{errorList.message} Error  first_name</div>:""}
-                        {console.log(errorList)}
+                        {/* {console.log(errorList)} */}
                     </div>
                     <div className='w-75 ms-2' >
                         <label htmlFor="last_name"></label>
